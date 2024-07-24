@@ -1,0 +1,52 @@
+import calendar, fmt;
+
+struct Name {
+    name: str,
+    surname: str
+}
+
+fn format(name: Name) -> str {
+    return fmt.format("{}, {}", name.surname, name.name);
+}
+
+struct Person {
+    name: Name,
+    birthdate: Date,
+    job: str = "None"
+}
+
+fn has_job(person: Person) -> bool {
+    return !person.job.empty();
+}
+
+fn print_job_status(person: Person) {
+    fmt.print("{} {} a job",
+        person.name.format(),
+        if person.has_job() { "has" } else { "doesn't have" });
+}
+
+fn main() -> i32 {
+    let max = Person{
+        name: {
+            name: "Max",
+            surname: "Mustermann"
+        },
+        birthdate: Date.from("19/05/1997")
+    };
+
+    let lisa = Person{
+        name: {
+            name: "Lisa",
+            surname: "Becker"
+        },
+        birthdate: Date.from("02/01/1989"),
+        job: "Data Scientist"
+    };
+
+    let people = [max, lisa];
+    for person in people {
+        person.print_job_status(); # print_job_status(person) would also work
+    }
+
+    return 0;
+}
